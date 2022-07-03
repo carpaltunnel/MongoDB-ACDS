@@ -123,3 +123,6 @@ db.createCollection("widgets", {
 ```
 
 You can also specify the value of `error` to indicate that inserts that do not pass validation should be blocked.  But, since that is the default, it is usually omitted.
+
+## Query Existing Validator
+To retrieve the information of an existing collection, including the validator / JSON schema, you can use the `db.getCollectionInfos()` command.  By default this will return the information for every collection in your database.  Since you are likely to have many collections, you'll probably want to provide a filter to specify the only collection you are interested in like `db.getCollectionInfos({ name: "widgets" })`
