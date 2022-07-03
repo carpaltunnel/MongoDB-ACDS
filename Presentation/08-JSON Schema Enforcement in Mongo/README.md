@@ -9,7 +9,7 @@ While it is possible to add validators to existing collections, it's typically a
 
 To do this, we will add the `validator` property to the options object when we create our collection and use the `$jsonSchema` operator to indicate the schema to be validated against.
 
-Let's take a look at the JSON schema we created in the previous lesson, modify it slightly for use with Mongo, and then create a new collection that uses it for validation.  The primary difference you'll notice is the usage of `bsonType` to define the type, rather than simply `type`.  We must remove the `format` property since it is unsupported by Mongo.  Additionally, the `integer` type is not supported so we need to change it to `number`.  All of our types must [conform to a valid BSON type](https://www.mongodb.com/docs/manual/reference/bson-types/).  
+Let's take a look at the JSON schema we created in the previous lesson, modify it slightly for use with Mongo, and then create a new collection that uses it for validation.  The primary difference you'll notice is the usage of `bsonType` to define the type, rather than simply `type`.  We must remove the `format` property since it is unsupported by Mongo.  Additionally, the `integer` type is not supported so we need to change it to `number` or `int`.  All of our types must [conform to a valid BSON type](https://www.mongodb.com/docs/manual/reference/bson-types/).  
 
 ```json
 {
