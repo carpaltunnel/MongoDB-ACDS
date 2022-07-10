@@ -150,3 +150,32 @@ There are many IDEs for working with MongoDB.  Below are three that I've tried a
 [Robo 3T](https://robomongo.org/) is a lightweight third party IDE that is much more basic than Compass, but it generally does everything I need it to do.
 
 The [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=mongodb.mongodb-vscode) allows you to setup a connection and do basic exploration/querying but it is very basic.  If you never want to leave VS Code and are okay with only reading JSON with no graphical enhancements... this might be for you.
+
+## MongoDB Data Types (BSON)
+We're already familiar with Javascript primitive types like string, number, and boolean but BSON (and therefore Mongo) supports [many more types](https://www.mongodb.com/docs/v4.4/reference/operator/query/type/#available-types).  The type for our document properties can be set when using an IDE like Compass but we can also specify the type in our queries.  To do this, we simply wrap the property with parentheses and the correct type name like so.
+
+```json
+db.collection.insertOne({
+  "calculation": NumberLong("92873498723498723"),
+  "orderNumber": NumberInt("3"),
+  "weight": NumberDecimal("23.49"),
+  "available": Boolean(true)
+});
+```
+
+You *generally* do not need to do this since Mongo will choose the appropriate type based on the value, as we've seen with strings, numbers, booleans, and so on.  However, there may be times where you need to specify the type to ensure the data is stored correctly and accurately.  In my experience, this is most likely to be required when working with specific types of numbers like in the example above.
+
+The full list of supported types can be found in the documentation but the list below covers the most common ones : 
+1. String
+2. Object
+3. Array
+4. Date
+5. Timestamp
+6. Boolean
+7. Null
+8. Number
+   1. Double
+   2. 32 Bit Integer
+   3. 64 Bit Integer
+   4. Long
+   5. Decimal
