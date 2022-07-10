@@ -64,6 +64,9 @@ $all : `db.people.find({ hobbies: { $all: ["camping", "hiking"] }})`
 
 Geo Index : `db.people.createIndex({coords: "2dsphere"})`
 
+Example of combining separate lat/long properties into an array suitable for a geo index : 
+`db.getCollection('people').updateMany({}, [{"$set": {"coords": ["$longitude", "$latitude"]}}])`
+
 Simple Queries : 
     People who like a certain color
     People who have a certain hobby
