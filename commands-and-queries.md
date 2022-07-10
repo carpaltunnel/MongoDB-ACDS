@@ -60,7 +60,9 @@ $all : `db.people.find({ hobbies: { $all: ["camping", "hiking"] }})`
 
 # Index Examples
 
-$text, $geo,
+**Important** : Coordinates must be listed in longitude, latitude order!
+
+Geo Index : `db.people.createIndex({coords: "2dsphere"})`
 
 Simple Queries : 
     People who like a certain color
