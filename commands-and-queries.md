@@ -77,7 +77,7 @@ Options :
 4. TTL
 
 # Basic Query Practice : 
-Simple Queries : 
+Queries : 
     People who like a certain color
     People who have a certain hobby
     People who have multiple hobbies
@@ -90,6 +90,11 @@ Simple Queries :
     People who own more than X number of vehicles
     Number of pets (0, 1, or more than X)
     People in an age range with a certain hobby
+    Number of people in a state
+    List of unique email addresses
+    Average/min/max age of people who enjoy a particular hobby
+    Most popular hobby
+    Most popular favorite color
 
 # Geo Index/Queries 
 
@@ -162,48 +167,3 @@ db.getCollection('people').find({
        }
      }
    })
-
-
-
-
-Aggregates : 
-
-Be sure to cover : 
-    $match
-    $addFields
-    $count
-    $group
-    $limit / $skip
-    $lookup
-    $project
-    $set / $unset
-    $sort
-    $unwind
-
-
-    
-    
-
-Maybe : 
-    $graphLookup
-    $out
-    $sample
-    
-
-Queries : 
-    Number of people in a state
-    List of unique email addresses
-    Average/min/max age of people who enjoy a particular hobby
-    Most popular hobby
-    Most popular favorite color
-    unwind example?
-
-
-
-GEO : https://www.mongodb.com/docs/manual/reference/operator/query/#geospatial
-    $geoNear : https://www.mongodb.com/docs/manual/reference/operator/aggregation/geoNear/#mongodb-pipeline-pipe.-geoNear
-
-    Distance between points
-    Two closest people
-    Two furthest away people
-    People closest to a specified location (and what that distance is)
