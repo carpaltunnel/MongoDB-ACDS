@@ -14,6 +14,10 @@
 
 `./mongoimport --file acds-data-1.json --collection people --db acds --jsonArray`
 
+`./mongoexport --collection people --db acds --out people-data-with-coordinates.json`
+
+See : "Example of combining separate lat/long properties into an array suitable for a geo index"
+
 
 # Query Operator Examples
 $eq : 
@@ -59,14 +63,20 @@ $all : `db.people.find({ hobbies: { $all: ["camping", "hiking"] }})`
     
 
 # Index Examples
+`db.people.createIndex({keys, options})`
 
-**Important** : Coordinates must be listed in longitude, latitude order!
+Special Types : 
+1. Geospatial
+2. Text
+3. Hashed
 
-Geo Index : `db.people.createIndex({coords: "2dsphere"})`
+Options : 
+1. Unique
+2. Partial
+3. Sparse
+4. TTL
 
-Example of combining separate lat/long properties into an array suitable for a geo index : 
-`db.getCollection('people').updateMany({}, [{"$set": {"coords": ["$longitude", "$latitude"]}}])`
-
+# Basic Query Practice : 
 Simple Queries : 
     People who like a certain color
     People who have a certain hobby
@@ -79,9 +89,70 @@ Simple Queries :
     People who own a particular make/model vehicle
     People who own more than X number of vehicles
     Number of pets (0, 1, or more than X)
-    
-
     People in an age range with a certain hobby
+
+# Geo Index/Queries 
+
+
+**Important** : Coordinates must be listed in longitude, latitude order!
+
+Geo Index : `db.people.createIndex({coords: "2dsphere"})`
+
+Example of combining separate lat/long properties into an array suitable for a geo index : 
+`db.getCollection('people').updateMany({}, [{"$set": {"coords": ["$longitude", "$latitude"]}}])`
+
+Geo Queries : 
+
+Arkansas Polygon Coordinates : 
+36.526802, -94.654032 northwest
+36.472899, -90.019774 northeast
+33.033187, -91.022933 southeast
+32.942091, -94.114652 southwest
+
+Little Rock Coordinates : 
+34.747459, -92.329080
+
+Find people (approximately) in Arkansas via Polygon :
+
+db.getCollection('people').find({
+     coords: {
+       $geoWithin: {
+          $polygon: 
+             [ [ -94.654032, 36.526802 ], [ -90.019774, 36.472899 ], 
+              [ -91.022933, 33.033187 ], [ -94.114652, 32.942091 ] ] 
+       }
+     }
+   });
+
+
+Find people in a circle around Little Rock (with ""units"") : 
+
+db.getCollection('people').find({
+     coords: {
+       $geoWithin: {
+          $center: 
+             [ [-92.329080, 34.747459], 2] 
+       }
+     }
+   })
+
+
+A better way : 
+
+db.getCollection('people').find({
+     coords: {
+       $nearSphere: {
+          $geometry: {
+              type: "Point",
+              coordinates: [-92.329080, 34.747459]
+          },
+          $minDistance: 0,
+          $maxDistance: 15000
+       }
+     }
+   })
+
+
 
 
 Aggregates : 
