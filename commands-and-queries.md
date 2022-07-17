@@ -137,6 +137,17 @@ db.getCollection('people').find({
    })
 
 
+Find people in a 100 mile circle around Little Rock (with radian units)
+db.getCollection('people').find({
+     coords: {
+       $geoWithin: {
+          $centerSphere: 
+             [ [-92.329080, 34.747459], 100 / 3963.2] 
+       }
+     }
+   })
+
+
 A better way : 
 
 db.getCollection('people').find({
