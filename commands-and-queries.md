@@ -158,7 +158,7 @@ db.getCollection('people').find({
 ```
 
 
-A better way (using meters - 15000 meters or 15km in this example): 
+A better way (using meters : 15000 meters or 15km in this example): 
 ```javascript
 db.getCollection('people').find({
      coords: {
