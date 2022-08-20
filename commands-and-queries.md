@@ -78,23 +78,23 @@ Options :
 
 # Basic Query Practice : 
 Queries : 
-    People who like a certain color
-    People who have a certain hobby
-    People who have multiple hobbies
-    People that are a certain age
-    People that are in an age range
-    Documents created within a date range
-    Documents updated within a date range
-    People updated by a certain user
-    People who own a particular make/model vehicle
-    People who own more than X number of vehicles
-    Number of pets (0, 1, or more than X)
-    People in an age range with a certain hobby
-    Number of people in a state
-    List of unique email addresses
-    Average/min/max age of people who enjoy a particular hobby
-    Most popular hobby
-    Most popular favorite color
+1. People who like a certain color
+2. People who have a certain hobby
+3. People who have multiple hobbies
+4. People that are a certain age
+5. People that are in an age range
+6. Documents created within a date range
+7. Documents updated within a date range
+8. People updated by a certain user
+9. People who own a particular make/model vehicle
+10. People who own more than X number of vehicles
+11. Number of pets (0, 1, or more than X)
+12. People in an age range with a certain hobby
+13. Number of people in a state
+14. List of unique email addresses
+15. Average/min/max age of people who enjoy a particular hobby
+16. Most popular hobby
+17. Most popular favorite color
 
 # Geo Index/Queries 
 
