@@ -109,16 +109,17 @@ Example of combining separate lat/long properties into an array suitable for a g
 Geo Queries : 
 
 Arkansas Polygon Coordinates : 
-36.526802, -94.654032 northwest
-36.472899, -90.019774 northeast
-33.033187, -91.022933 southeast
-32.942091, -94.114652 southwest
+1. 36.526802, -94.654032 northwest
+2. 36.472899, -90.019774 northeast
+3. 33.033187, -91.022933 southeast
+4. 32.942091, -94.114652 southwest
 
-Little Rock Coordinates : 
-34.747459, -92.329080
+Little Rock Zoo Coordinates : 
+1. 34.747459, -92.329080
+
 
 Find people (approximately) in Arkansas via Polygon :
-
+```javascript
 db.getCollection('people').find({
      coords: {
        $geoWithin: {
@@ -128,10 +129,11 @@ db.getCollection('people').find({
        }
      }
    });
+```
 
 
 Find people in a circle around Little Rock (with ""units"") : 
-
+```javascript
 db.getCollection('people').find({
      coords: {
        $geoWithin: {
@@ -140,9 +142,11 @@ db.getCollection('people').find({
        }
      }
    })
+```
 
 
 Find people in a 100 mile circle around Little Rock (with radian units)
+```javascript
 db.getCollection('people').find({
      coords: {
        $geoWithin: {
@@ -151,10 +155,11 @@ db.getCollection('people').find({
        }
      }
    })
+```
 
 
 A better way : 
-
+```javascript
 db.getCollection('people').find({
      coords: {
        $nearSphere: {
@@ -167,3 +172,4 @@ db.getCollection('people').find({
        }
      }
    })
+```
