@@ -132,7 +132,7 @@ db.getCollection('people').find({
 ```
 
 
-Find people in a circle around Little Rock (with ""units"") : 
+Find people in a circle around Little Rock (with ""units"" as specified by the coordinate system) : 
 ```javascript
 db.getCollection('people').find({
      coords: {
@@ -158,7 +158,7 @@ db.getCollection('people').find({
 ```
 
 
-A better way : 
+A better way (using meters - 15000 meters or 15km in this example): 
 ```javascript
 db.getCollection('people').find({
      coords: {
