@@ -147,7 +147,6 @@
             <li>Partial - Defines an index that will only include documents that meet specified filter expressions. Similar to a Sparse index.</li>
             <li>Sparse - Sparse will only index documents that have the specified field.</li>
             <li>TTL (Time To Live) - TTL indexes allow you to automatically delete documents after a specified amount of time. </li>
-            <li>Hidden (as of v4.4) - Hidden indexes are not visible to the query planner and will not be used under any circumstance.</li>
         </ul>
         
         <div class="notes">
@@ -220,7 +219,7 @@ createIndex({ name: 1 }, { hidden: true });</code></pre>
         <h1>Covered Queries</h1>
         <p>A "covered" query is a query that only includes the fields of the index in the projection.</p>
         <br />
-        <p> These are probably going to be the fastest queries you will get so it can be extremely beneficial to optimize for covered queries for your most heavily used requests.</p>
+        <p> These are going to be the fastest queries you will get so it can be extremely beneficial to optimize for covered queries for your most heavily used requests.</p>
         
         <div class="notes">
         </div>

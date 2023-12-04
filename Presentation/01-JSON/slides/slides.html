@@ -96,18 +96,37 @@
         </div>
     </div>
 
+    <div id="types" class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>Types</h1>
+        <p>There are six(ish) types supported in JSON:</p>
+
+        <ol>
+            <li>String : "I'm a string"</li>
+            <li>Number : 5.1</li>
+            <li>Boolean : true / false</li>
+            <li>Object : { }</li>
+            <li>Array : [ ]</li>
+            <li>Null : null</li>
+            <li>Undefined (implicit) : Absence of key/property</li>
+        </ol>
+
+        <div class="notes">
+        </div>
+    </div>
+
 
     <div id="how" class="step slide" data-rel-x="2200" data-rel-y="0">
         <h1>How?</h1>
-        <p>JSON looks similar to Javascript declarations except no declaration (const/let) is required, all keys and values are strings, and they must be enclosed in double quotes with the exception of Numbers and Booleans.</p>
+        <p>JSON looks similar to Javascript declarations except no declaration (const/let) is required, all keys must be strings, and strings must be enclosed in double quotes.</p>
 
         <pre><code class="javascript">{
     "vehicle": {
-        "make": "Tesla",
-        "model": "S",
-        "year": 2020,
+        "make": "Honda",
+        "model": "Civic",
+        "year": 1995,
         "salvaged": false,
-        "authorizedDrivers": ["Person1", "Person2", "Person3"]
+        "authorizedDrivers": ["Person1", "Person2", "Person3"],
+        "securitySystem": null
     }
 }</code></pre>
 

@@ -112,8 +112,8 @@
     </div>
 
     <div id="types" class="step slide" data-rel-x="2200" data-rel-y="0">
-        <h1>BSON Types</h1>
-        <p>While generally not required, we can specify the type of the properties that we store in Mongo.</p>
+        <h1>(Basic) <a href="https://www.mongodb.com/docs/manual/reference/bson-types/">BSON</a> Types</h1>
+        <p>While generally not required, depending on how we're using it, we can specify the type of the properties that we store in Mongo.</p>
         
         <ol>
             <li>String</li>
@@ -121,6 +121,7 @@
             <li>Object / Array</li>
             <li>Number (Double, 32/64 bit Integer, Long, Decimal)</li>
             <li>Boolean</li>
+            <li>Null</li>
         </ol>
         
         <div class="notes">
@@ -185,7 +186,8 @@ show collections;</code></pre>
         <p>Before we talk about operators, let's generate some mock data and import it so we have something to query without
             needing to manually create it.
         </p>
-        
+        <br /><br />
+        <pre><code class="javascript">./mongoimport --file widgets-data.json --collection widgets --db acds --jsonArray</code></pre>
         <div class="notes">
         </div>
     </div>
@@ -194,7 +196,8 @@ show collections;</code></pre>
         <h1>Mongo IDEs</h1>
         <ul>
             <li><a href="https://www.mongodb.com/products/compass">Compass</a></li>
-            <li><a href="https://robomongo.org/">Robo 3T</a></li>
+            <li><a href="https://robomongo.org/">Robo 3T / Studio 3T</a></li>
+            <li><a href="https://nosqlbooster.com/">NoSQLBooster</a></li>
             <li><a href="https://marketplace.visualstudio.com/items?itemName=mongodb.mongodb-vscode">VS Code</a></li>
 
         </ul>
@@ -282,7 +285,7 @@ db.widgets.find({ "tags": "fun" });</code></pre>
             <li>$type</li>
             <li>$mod</li>
             <li>$regex</li>
-            <li>$text</li>
+            <li>$text (requires text index)</li>
             <li>$where (Javascript eval)</li>
         </ul>
         

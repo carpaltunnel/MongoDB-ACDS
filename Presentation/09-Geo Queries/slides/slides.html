@@ -70,143 +70,114 @@
         your cooler impress.js presentations.
     -->
     <div id="title" class="step slide title" data-x="-2200" data-y="-3000">
-        <h1>MongoDB Aggregation</h1>
+        <h1>MongoDB Geo Queries</h1>
         <br /><br />
         <br /><br />
-        Aggregation in MongoDB is a way to perform complex operations in a staged, efficient manner.  Somewhat similar to "group by" in a RDBMS but very, very different. 
+        <br /><br />
+        MongoDB provides several Geo operators we can use to query documents by geospatial references <strong>on geo indexes</strong>
         <div class="notes">
         </div>
     </div>
 
-
-    <div id="pipeline" class="step slide" data-rel-x="2200" data-rel-y="0">
-        <h1>Aggregation Pipeline</h1>
-        <p>The aggregation pipeline is the list of "stages" that are applied incrementally to reach the desired conclusion.</p>
-        <ol>
-            <li>Stage receives input documents</li>
-            <li>Executes stage logic (filter, transform, group, etc)</li>
-            <li>Outputs documents to the next stage</li>
-            <li>Repeat</li>
-        </ol>
+    <div id="dataformat" class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>Geo Data Format</h1>
+        <p>The format of your data is <strong>extremely important</strong></p>
         
-        <pre><code class="javascript">db.collection.aggregate([]);</code></pre>
+        <p>array vs geojson</p>
         
         <div class="notes">
         </div>
     </div>
 
-    <div id="agg-operators" class="step slide" data-rel-x="2200" data-rel-y="0">
-        <h1>Aggregation Operators</h1>
-        <p>Each aggregation operator can be used multiple times in a pipeline with the exception of <code>$out</code>, <code>$merge</code>, and <code>$geoNear</code>. </p>
+
+    <div id="operators1" class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>Geo Operators</h1>
+        <p>Note: Geo operators <strong>should</strong> execute against a geo index</p>
         
         <ul>
-            <li><code>$addFields</code> (or <code>$set</code>) - Add new fields to the documents</li>
-            <li><code>$count</code> - Returns the number of documents at the current stage</li>
-            <li><code>$geoNear</code> - Returns an ordered stream of documents based on the proximity to a geospatial point.</li>
-            <li><code>$group</code> - Groups documents by the specified identifier expression and applies accumulator expressions if specified.</li>
-            <li><code>$limit</code> -  Limits the number of documents that pass through the stage</li>
+            <li><code>$geoIntersects</code> - Intersection of two geometries</li>
+            <li><code>$geoWithin</code> - Data is entirely within the specified polygon</li>
+            <li><code>$near</code> - Return data from nearest to farthest with limits</li>
+            <li><code>$nearSphere</code> - Same, but spherical geometry</li>
+            <li><code>$box</code> - Used with $geoWithin to define a box the data must be within</li>
+            <li><code>$center</code> - Used with $geoWithin to define a circle the data must be within</li>
+            <li><code>$centerSphere</code> - Same, but spherical geometry</li>
+        </ul>
+        
+        <div class="notes">
+        </div>
+    </div>
+
+    <div id="operators2" class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>Geo Operators - Continued</h1>
+        <p>Note: Geo operators <strong>should</strong> execute against a geo index</p>
+        
+        <ul>
+            <li><code>$geometry</code> - GeoJSON geometry for use with other operators</li>
+            <li><code>$maxDistance</code> - Constrains $near and $nearSphere</li>
+            <li><code>$minDistance</code> - Constrains $near and $nearSphere</li>
+            <li><code>$polygon</code> - Used with $geoWithin to define a polygon the data must be within</li>
+            <li><code>$uniqueDocs</code> - Deprecated in v2.6, now the default</li>
+        </ul>
+        
+        <div class="notes">
+        </div>
+    </div>
+
+    
+
+    <div id="" class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1></h1>
+        <p></p>
+        
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        
+        <div class="notes">
+        </div>
+    </div>
+
+    <div id="" class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1></h1>
+        <p></p>
+        
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        
+        <div class="notes">
+        </div>
+    </div>
+
+    <div id="" class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1></h1>
+        <p></p>
+        
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
         </ul>
         
         <div class="notes">
         </div>
     </div>
     
-    <div id="agg-operators-2" class="step slide" data-rel-x="2200" data-rel-y="0">
-        <h1>Aggregation Operators - Part 2</h1>
-        <ul>
-            <li><code>$lookup</code> - Performs a left outer join to an unsharded collection in the same database to filter in documents from the "joined" collection</li>
-            <li><code>$match</code> - Filters documents by the match criteria</li>
-            <li><code>$project</code> - Modifies each document in the stream by adding or removing fields. Same as the projection in a <code>find()</code>.</li>
-            <li><code>$skip</code>- Similar to limit, but it skips the first X documents rather than limiting the result set to the first X documents.</li>
-            <li><code>$sort</code> - Reorders documents by the specified key.</li>
-            <li><code>$unwind</code> - Deconstructs an array to create one document per array item</li>
-        </ul>
-        
-        <div class="notes">
-        </div>
-    </div>
 
-    <div id="accumulators" class="step slide" data-rel-x="2200" data-rel-y="0">
-        <h1>Accumulators</h1>
-        <p>Accumulator operators are used with <code>$group</code> to apply logic to documents that are being grouped.</p>
-        
-        <ul>
-            <li><code>$addToSet</code> -  Returns an array of unique values for each group.</li>
-            <li><code>$avg</code> - Returns an average of numerical values. Ignores non-numeric values.</li>
-            <li><code>$first</code> - Returns a value from the first document for each group.</li>
-            <li><code>$last</code> - Returns a value from the last document for each group.</li>
-            <li><code>$max</code> - Returns the maximum value for each group.</li>
-        </ul>
-        
-        <div class="notes">
-        </div>
-    </div>
-
-    <div id="accumulators2" class="step slide" data-rel-x="2200" data-rel-y="0">
-        <h1>Accumulators - Part 2</h1>
-        <p></p>
-
-        <ul>
-            <li><code>$mergeObjects</code> -  Returns a document created by combining the input documents for each group.</li>
-            <li><code>$min</code> - Returns the minimum value for each group.</li>
-            <li><code>$push</code> -  Returns an array of expression values for each group (not unique).</li>
-            <li><code>$sum </code> - Returns a sum of numerical values. Ignores non-numeric values.</li>
-
-        </ul>
-        
-        <div class="notes">
-        </div>
-    </div>
-
-    <div id="values" class="step slide" data-rel-x="2200" data-rel-y="0">
-        <h1>Referencing Values</h1>
-        <p>It's important to note that to refer to the value of a field in an aggregation stage that you need to specify the field name, in quotes, prefixed by the $ symbol.</p>
-        
-        <pre><code class="javascript"> maxCost: { $max: "$cost" }</code></pre>
-        
-        <div class="notes">
-        </div>
-    </div>
-
-    <div id="memory" class="step slide" data-rel-x="2200" data-rel-y="0">
-        <h1>Memory Note</h1>
-        <br /><br />
-        <p>The <code>$group</code> stage has a limit of 100MB of RAM. By default, the stage will return an error is this limit is exceeded. However, the <code>allowDiskUse</code> will allow aggregation stages to write to temporary files.</p>
-        
-        <div class="notes">
-        </div>
-    </div>
-
-    <div id="chaining-stages" class="step slide" data-rel-x="2200" data-rel-y="0">
-        <h1>Chaining Stages</h1>
-        <p>The aggregate pipeline expects an array parameter that defines a list of stages and the order in which they will be executed. Care should be taken to create stages in the most efficient order. </p>
-        
-        <pre><code class="javascript">db.widgets.aggregate([
-    { $match: { color: "red" } },
-    { 
-        $group: {
-            _id: "$color",
-            totalWeight: { $sum: "$weight" }
-        } 
-     }
-]);</code></pre>
-        
-        <div class="notes">
-        </div>
-    </div>
-
-    <div id="examples" class="step slide" data-rel-x="2200" data-rel-y="0">
-        <h1>Examples</h1>
-        <ol>
-            <li>Calculate the minimum, maximum, and total weight for each color widget with a count of how many widgets were in the group</li>
-            <li>Generate a unique list of all widget names</li>
-            <li>Unwind the "tags" array to generate one document per tag</li>
-            <li>Use <code>$lookup</code> to connect documents across collections</li>
-        </ol>
-        
-        <div class="notes">
-        </div>
-    </div>
 
     <!-- This last, empty "slide" is set to be very large using the data-scale attribute, 
          so that it covers all the other slides you just saw. 
