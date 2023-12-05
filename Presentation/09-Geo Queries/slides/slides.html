@@ -83,11 +83,41 @@
         <h1>Geo Data Format</h1>
         <p>The format of your data is <strong>extremely important</strong></p>
         
-        <p>array vs geojson</p>
+        <p>Mongo supports geo data in both [LONG, LAT] format and <a href="https://geojson.org/">GeoJSON</a> format.  Since latitude and longitude is more common, we'll only cover that here</p>
+
+        <br /><br />
+        <p><strong>IMPORTANT:</strong> Latitude/Longitude data <strong>MUST</strong> be an array with Longitude first and Latitude second!  Let's load and then convert the "people" data to this format.</p>
         
         <div class="notes">
         </div>
     </div>
+
+    <div id="latlongconvert" class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>Combining Lat/Long </h1>
+        <p>It's not uncommon to receive data in an unsupported lat/long format.  Here's one way you can convert it:</p>
+        
+
+        <br /><br />
+        <code>db.people.updateMany({}, [{"$set": {"coords": ["$longitude", "$latitude"]}}])</code>
+        
+        <div class="notes">
+        </div>
+    </div>
+
+
+    <div id="geo-index" class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>Indexes</h1>
+        <p>While <em>some</em> geo operators can function without a geospatial index, it's almost always recommended to create one.  We'll use the <code>2dsphere</code> index type</p>
+        
+
+        <br /><br />
+        <code>db.people.createIndex({coords: "2dsphere"})</code>
+        
+        <div class="notes">
+        </div>
+    </div>
+
+
 
 
     <div id="operators1" class="step slide" data-rel-x="2200" data-rel-y="0">
@@ -126,18 +156,70 @@
 
     
 
-    <div id="" class="step slide" data-rel-x="2200" data-rel-y="0">
-        <h1></h1>
-        <p></p>
+    <div id="within-area" class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>Searching Within a Bounded Area</h1>
+        <p>To search "within" an area, we can define a polygon and use the <code>$geoWithin</code> operator to find points inside of it.</p>
         
+        <h2>Arkansas Coordinates (lat, long)</h2>
         <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li>36.526802, -94.654032 (northwest)</li>
+            <li>36.472899, -90.019774 (northeast)</li>
+            <li>33.033187, -91.022933 (southeast)</li>
+            <li>32.942091, -94.114652 (southwest)</li>
         </ul>
+        
+        <div class="notes">
+        </div>
+    </div>
+
+    <div id="within-circle" class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>Searching Within a Defined Distance (2d)</h1>
+        <p>We can also do a simple search within a (as the crow flies) distance of a point.  The <code>$center</code> operator uses *"units"* for distance calculation</p>
+        
+        <code><pre>db.people.find({
+    coords: {
+        $geoWithin: {
+            $center: 
+                [ [-92.329080, 34.747459], 2] 
+            }
+    }
+});</pre></code>
+        
+        <div class="notes">
+        </div>
+    </div>
+
+    <div id="within-circle-sphere" class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>Extended to a 2dsphere</h1>
+        <p>We can also do a simple search within a (as the crow flies) distance of a point.  The <code>$centerSphere</code> operator uses *radians* for distance calculation</p>
+        
+        <code><pre>db.people.find({
+    coords: {
+        $geoWithin: {
+            $centerSphere: 
+                [ [-92.329080, 34.747459], 100 / 3963.2] 
+            }
+    }
+});</pre></code>
+        
+        <div class="notes">
+        </div>
+    </div>
+
+
+    <div id="nearsphere" class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h2><code>$nearSphere</code> with GeoJSON (meters)</h2>
+        <code><pre>db.people.find({
+    coords: {
+        $nearSphere: {
+            $geometry: {
+                type: "Point",
+                coordinates: [-92.329080, 34.747459]
+            },
+            $minDistance: 0,
+            $maxDistance: 15000
+        }
+}</pre></code>
         
         <div class="notes">
         </div>
