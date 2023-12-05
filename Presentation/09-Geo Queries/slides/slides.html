@@ -208,7 +208,7 @@
 
 
     <div id="nearsphere" class="step slide" data-rel-x="2200" data-rel-y="0">
-        <h2><code>$nearSphere</code> with GeoJSON (meters)</h2>
+        <h2><code>$nearSphere</code> with GeoJSON</h2>
         <code><pre>db.people.find({
     coords: {
         $nearSphere: {
@@ -216,8 +216,8 @@
                 type: "Point",
                 coordinates: [-92.329080, 34.747459]
             },
-            $minDistance: 0,
-            $maxDistance: 15000
+            $minDistance: 0, // meters
+            $maxDistance: 15000 // meters
         }
 }</pre></code>
         
@@ -225,39 +225,14 @@
         </div>
     </div>
 
-    <div id="" class="step slide" data-rel-x="2200" data-rel-y="0">
-        <h1></h1>
-        <p></p>
-        
-        <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
+    <div id="further" class="step slide" data-rel-x="2200" data-rel-y="0">
+        <h1>Geospatial Operators in Aggregations</h1>
+        <p>We can also use geospatial operators in aggregation pipelines to combine multiple different types of operators in stages for complex queries.</p>
         
         <div class="notes">
         </div>
     </div>
 
-    <div id="" class="step slide" data-rel-x="2200" data-rel-y="0">
-        <h1></h1>
-        <p></p>
-        
-        <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
-        
-        <div class="notes">
-        </div>
-    </div>
     
 
 
